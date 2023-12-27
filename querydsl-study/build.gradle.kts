@@ -34,7 +34,8 @@ dependencies {
 
     // kotlin
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("com.mysql:mysql-connector-j:8.0.31")
+    // h2
+    runtimeOnly("com.h2database:h2:1.4.200")
 
     developmentOnly("org.springframework.boot:spring-boot-devtools:3.1.5")
     testImplementation("org.springframework.boot:spring-boot-starter-test:3.1.5")
