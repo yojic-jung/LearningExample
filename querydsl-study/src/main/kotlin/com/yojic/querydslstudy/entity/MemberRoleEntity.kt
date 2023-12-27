@@ -8,8 +8,8 @@ import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.UpdateTimestamp
 import java.time.LocalDateTime
 
-@Entity
-class MemberRole(
+@Entity(name = "MemberRole")
+class MemberRoleEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val memRoleId: Long = 0,

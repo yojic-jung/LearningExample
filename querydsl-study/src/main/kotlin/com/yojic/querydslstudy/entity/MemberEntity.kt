@@ -1,12 +1,13 @@
-import com.yojic.querydslstudy.entity.MemberRole
+package com.yojic.querydslstudy.entity
+
 import jakarta.persistence.*
 import jakarta.persistence.GenerationType.*
 import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.UpdateTimestamp
 import java.time.LocalDateTime
 
-@Entity
-class Member(
+@Entity(name = "Member")
+class MemberEntity(
 // open 키워드 사용하지 않아도 정상 작동(하이버네이트 5.0 이상부터 bytecode enhancement 방식으로 지원)
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -22,5 +23,5 @@ class Member(
     var sysCreateTime: LocalDateTime = LocalDateTime.now(),
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "memId", referencedColumnName = "memId", updatable = false)
-    var role: MutableList<MemberRole>? = null,
+    var roles: MutableList<MemberRoleEntity>? = null,
 )

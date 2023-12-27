@@ -8,8 +8,8 @@ import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.UpdateTimestamp
 import java.time.LocalDateTime
 
-@Entity
-class MemberPrivate(
+@Entity(name = "MemberPrivate")
+class MemberPrivateEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val memPrvcId: Long = 0,
@@ -20,5 +20,5 @@ class MemberPrivate(
     @CreationTimestamp
     val sysUpdateTime: LocalDateTime = LocalDateTime.now(),
     @UpdateTimestamp
-    val sysCreateTime: LocalDateTime = LocalDateTime.now()
+    val sysCreateTime: LocalDateTime = LocalDateTime.now(),
 )
