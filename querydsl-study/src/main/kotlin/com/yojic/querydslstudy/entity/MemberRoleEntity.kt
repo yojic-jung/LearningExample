@@ -1,9 +1,6 @@
 package com.yojic.querydslstudy.entity
 
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
+import jakarta.persistence.*
 import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.UpdateTimestamp
 import java.time.LocalDateTime
@@ -20,4 +17,7 @@ class MemberRoleEntity(
     val sysUpdateTime: LocalDateTime = LocalDateTime.now(),
     @UpdateTimestamp
     val sysCreateTime: LocalDateTime = LocalDateTime.now(),
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "memId", referencedColumnName = "memId", insertable = false, updatable = false)
+    var member: MemberEntity? = null
 )

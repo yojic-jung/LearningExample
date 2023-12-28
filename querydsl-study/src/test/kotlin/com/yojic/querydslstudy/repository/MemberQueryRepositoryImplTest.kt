@@ -17,6 +17,9 @@ class MemberQueryRepositoryImplTest {
     @Autowired
     lateinit var memberJpaRepository: MemberJpaRepository
 
+    @Autowired
+    lateinit var memberRoleJpaRepository: MemberRoleJpaRepository
+
     @Test
     fun `dto로 특정 칼럼 조회 테스트`() {
         memberJpaRepository.save(MemberEntity(memId = 1, email = "dywlr@naver.com"))
@@ -63,19 +66,39 @@ class MemberQueryRepositoryImplTest {
     @BeforeEach
     fun test() {
         // given
-        val memberList = ArrayList<MemberEntity>()
-        for (i in 0..50) {
-            val mem = MemberEntity(memId = i.toLong())
-            val role = MemberRoleEntity(memId = i.toLong(), enabled = true, roleName = "user")
-            mem.roles = mutableListOf<MemberRoleEntity>(role)
-            memberList.add(mem)
+        for (i in 1..10) {
+            var mem = MemberEntity(memId = i.toLong(), email = "test $i")
+            val member = memberJpaRepository.save(mem)
+            val role = memberRoleJpaRepository.save(MemberRoleEntity(memId = member.memId, enabled = true, roleName = "user"))
+            println(member.memId)
+            println("${role.memId} ${role.memRoleId}")
         }
-        memberJpaRepository.saveAll(memberList)
     }
 
     @Test
     fun `fetchjoin 테스트`() {
+        // when
         val memberListWithRole = memberJpaRepository.findAllMembersFetchJoin()
-        assertThat(memberListWithRole?.get(0)?.roles?.get(0)).isNotNull
+        // then
+        for (mem in memberListWithRole!!) {
+            println("${mem.memId}, ${mem.roles?.get(0)?.memRoleId}")
+        }
+
+        assertThat(memberListWithRole?.get(0)?.roles?.get(0)?.memRoleId).isGreaterThan(0)
+    }
+
+    @Test
+    fun `no-fetchjoin 테스트`() {
+        // given
+        for (i in 0..50) {
+            val mem = MemberEntity(memId = i.toLong(), email = "test $i")
+            mem.roles = mutableListOf(MemberRoleEntity(memId = i.toLong(), enabled = true, roleName = "user"))
+            val member = memberJpaRepository.save(mem)
+            memberJpaRepository.save(member)
+        }
+        // when
+        val memberListWithRole = memberJpaRepository.findAllMembersNoFetchJoin()
+        // then
+        assertThat(memberListWithRole?.get(0)?.roles?.get(0)).isNull()
     }
 }

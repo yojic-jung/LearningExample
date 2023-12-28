@@ -7,8 +7,10 @@ interface MemberQueryRepository {
     fun findAllMembers(): List<MemberEntity>?
 
     fun findAllMembersWithRoles(): List<MemberEntity>?
-    
+
     fun findAllMembersFetchJoin(): List<MemberEntity>?
+
+    fun findAllMembersNoFetchJoin(): List<MemberEntity>?
 
     fun findAllMembersEmail(): List<MemberDto>?
 

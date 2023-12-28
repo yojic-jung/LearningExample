@@ -30,9 +30,18 @@ class MemberQueryRepositoryImpl(
             .select(
                 member,
             ).from(member)
-            .leftJoin(role)
-            .where(member.memId.eq(role.memId))
-            .fetchJoin()
+            .leftJoin(member.roles, role).fetchJoin()
+            .fetch()
+}
+
+    override fun findAllMembersNoFetchJoin(): List<MemberEntity>? {
+        val member = QMemberEntity.memberEntity
+        val role = QMemberRoleEntity.memberRoleEntity
+        return jpaQueryFactory
+            .select(
+                member,
+            ).from(member)
+            .leftJoin(member.roles, role)
             .fetch()
     }
 
@@ -47,6 +56,7 @@ class MemberQueryRepositoryImpl(
             .where(member.memId.eq(role.memId))
             .fetch()
     }
+
     override fun findAllMembersEmail(): List<MemberDto>? {
         val member = QMemberEntity.memberEntity
         return jpaQueryFactory
@@ -68,6 +78,7 @@ class MemberQueryRepositoryImpl(
             ).from(member)
             .fetchOne()
     }
+
     override fun findMemberEmailLimitOne(): MemberEntity? {
         val member = QMemberEntity.memberEntity
         return jpaQueryFactory
@@ -76,6 +87,4 @@ class MemberQueryRepositoryImpl(
             ).from(member)
             .fetchFirst()
     }
-
-
 }
