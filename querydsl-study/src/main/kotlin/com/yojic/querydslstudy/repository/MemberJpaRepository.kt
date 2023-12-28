@@ -6,11 +6,13 @@ import org.springframework.data.jpa.repository.Query
 import org.springframework.stereotype.Repository
 
 @Repository
-interface MemberJpaRepository : JpaRepository<MemberEntity, Long> {
+interface MemberJpaRepository : JpaRepository<MemberEntity, Long>, MemberQueryRepository {
+
+    fun findByMemId(memId: Long): MemberEntity?
 
     @Query("SELECT m FROM Member m")
-    fun findAllMembers(): List<MemberEntity>
+    fun findAllOnlyMember(): List<MemberEntity>?
 
     @Query("SELECT m FROM Member m LEFT JOIN FETCH m.roles")
-    fun findAllMembersWithRoles(): List<MemberEntity>
+    fun findAllWithRoles(): List<MemberEntity>?
 }

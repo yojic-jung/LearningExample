@@ -1,10 +1,18 @@
 package com.yojic.querydslstudy.repository
 
+import com.yojic.querydslstudy.dto.MemberDto
 import com.yojic.querydslstudy.entity.MemberEntity
-import org.springframework.stereotype.Repository
 
 interface MemberQueryRepository {
-    fun findAllMembers(): List<MemberEntity>
+    fun findAllMembers(): List<MemberEntity>?
 
-    fun findAllMembersWithRoles(): List<MemberEntity>
+    fun findAllMembersWithRoles(): List<MemberEntity>?
+    
+    fun findAllMembersFetchJoin(): List<MemberEntity>?
+
+    fun findAllMembersEmail(): List<MemberDto>?
+
+    fun findMemberEmailOnlyOne(): MemberEntity?
+
+    fun findMemberEmailLimitOne(): MemberEntity?
 }
