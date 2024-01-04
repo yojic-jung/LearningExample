@@ -22,6 +22,6 @@ class MemberEntity(
     @UpdateTimestamp
     var sysCreateTime: LocalDateTime = LocalDateTime.now(),
     @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "memId", referencedColumnName = "memId", updatable = false)
-    var roles: MutableList<MemberRoleEntity>? = null,
+    @JoinColumn(name = "memId", referencedColumnName = "memId", insertable = false, updatable = false)
+    var roles: List<MemberRoleEntity>? = null,
 )

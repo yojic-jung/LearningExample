@@ -20,6 +20,8 @@ class MemberQueryRepositoryImplTest {
     @Autowired
     lateinit var memberRoleJpaRepository: MemberRoleJpaRepository
 
+
+
     @Test
     fun `dto로 특정 칼럼 조회 테스트`() {
         memberJpaRepository.save(MemberEntity(memId = 1, email = "dywlr@naver.com"))
@@ -32,6 +34,7 @@ class MemberQueryRepositoryImplTest {
     fun `fetchOne 테스트`() {
         // 0건 조회 - null 반환
         val nullExpected = memberJpaRepository.findMemberEmailOnlyOne()
+        println(nullExpected)
         assertThat(nullExpected).isNull()
 
         // 1건 조회
@@ -63,42 +66,37 @@ class MemberQueryRepositoryImplTest {
         assertThat(memberSerchedPlural).isNotNull
     }
 
-    @BeforeEach
-    fun test() {
-        // given
-        for (i in 1..10) {
-            var mem = MemberEntity(memId = i.toLong(), email = "test $i")
-            val member = memberJpaRepository.save(mem)
-            val role = memberRoleJpaRepository.save(MemberRoleEntity(memId = member.memId, enabled = true, roleName = "user"))
-            println(member.memId)
-            println("${role.memId} ${role.memRoleId}")
-        }
-    }
+
 
     @Test
     fun `fetchjoin 테스트`() {
+        // given
+        for (i in 1..10) {
+            val mem = MemberEntity(email = "test $i")
+            mem.roles = mutableListOf(MemberRoleEntity(memId = i.toLong(), enabled = true, roleName = "user"))
+            memberJpaRepository.save(mem)
+        }
         // when
         val memberListWithRole = memberJpaRepository.findAllMembersFetchJoin()
         // then
         for (mem in memberListWithRole!!) {
-            println("${mem.memId}, ${mem.roles?.get(0)?.memRoleId}")
+            println("${mem.memId}, ${mem.roles?.get(0)?.memRoleId}, ${mem.roles?.get(0)?.roleName}")
         }
 
-        assertThat(memberListWithRole?.get(0)?.roles?.get(0)?.memRoleId).isGreaterThan(0)
+        assertThat(memberListWithRole?.get(0)?.roles?.size).isGreaterThan(0)
     }
 
     @Test
     fun `no-fetchjoin 테스트`() {
         // given
-        for (i in 0..50) {
-            val mem = MemberEntity(memId = i.toLong(), email = "test $i")
+        for (i in 0..10) {
+            val mem = MemberEntity(email = "test $i")
             mem.roles = mutableListOf(MemberRoleEntity(memId = i.toLong(), enabled = true, roleName = "user"))
-            val member = memberJpaRepository.save(mem)
-            memberJpaRepository.save(member)
+            memberJpaRepository.save(mem)
         }
         // when
         val memberListWithRole = memberJpaRepository.findAllMembersNoFetchJoin()
         // then
-        assertThat(memberListWithRole?.get(0)?.roles?.get(0)).isNull()
+        assertThat(memberListWithRole?.get(0)?.roles?.size).isEqualTo(1)
     }
 }

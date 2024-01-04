@@ -32,7 +32,7 @@ class MemberQueryRepositoryImpl(
             ).from(member)
             .leftJoin(member.roles, role).fetchJoin()
             .fetch()
-}
+    }
 
     override fun findAllMembersNoFetchJoin(): List<MemberEntity>? {
         val member = QMemberEntity.memberEntity
