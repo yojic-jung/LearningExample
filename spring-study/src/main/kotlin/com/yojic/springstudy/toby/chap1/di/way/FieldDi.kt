@@ -6,12 +6,11 @@ import org.springframework.stereotype.Component
 @Component
 class FieldDi {
     @Autowired
-    private lateinit var apple: Apple
-
+    lateinit var apple: Apple
     @Autowired
-    private lateinit var banana: Banana
+    lateinit var banana: Banana
 
-    fun diTest() {
-        println("$apple, $banana")
+    fun diWorkingMethod() {
+        println("${apple.appleMethod()}, ${banana.bananaMethod()}")
     }
 }

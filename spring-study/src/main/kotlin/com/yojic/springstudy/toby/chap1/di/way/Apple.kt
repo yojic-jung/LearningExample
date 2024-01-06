@@ -4,7 +4,5 @@ import org.springframework.stereotype.Component
 
 @Component
 class Apple {
-    override fun toString(): String {
-        return "apple"
-    }
+    fun appleMethod(): String = "apple입니다."
 }

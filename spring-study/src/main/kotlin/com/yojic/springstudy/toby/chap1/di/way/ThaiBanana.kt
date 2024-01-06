@@ -3,7 +3,6 @@ package com.yojic.springstudy.toby.chap1.di.way
 import org.springframework.stereotype.Component
 
 @Component
-class ConstructorDi(
-    var apple: Apple,
-    var banana: Banana,
-)
+class ThaiBanana : Banana {
+    override fun bananaMethod(): String = "태국 banana입니다."
+}
