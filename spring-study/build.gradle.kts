@@ -19,6 +19,8 @@ repositories {
 }
 
 dependencies {
+    implementation(kotlin("stdlib"))
+
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
@@ -29,6 +31,10 @@ tasks.withType<KotlinCompile> {
         freeCompilerArgs += "-Xjsr305=strict"
         jvmTarget = "17"
     }
+}
+
+tasks.test {
+    useJUnitPlatform()
 }
 
 tasks.withType<Test> {

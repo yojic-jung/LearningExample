@@ -1,6 +1,7 @@
 package com.yojic.springstudy.toby.chap1.soc
 
 class GiveawayMachineTest {
+    /*
     companion object {
         @JvmStatic
         fun main(args: Array<String>) {
@@ -9,4 +10,5 @@ class GiveawayMachineTest {
             print(customInfo)
         }
     }
+    */
 }
