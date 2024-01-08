@@ -1,10 +1,8 @@
 package com.yojic.springstudy.toby.chap1.di
 
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.stereotype.Service
+import org.springframework.stereotype.Component
 
-@Service
-class CircularReferenceB {
-    @Autowired
-    lateinit var circularReferenceA: CircularReferenceA
-}
+@Component
+class CircularReferenceB(
+    var circularReferenceA: CircularReferenceA,
+)

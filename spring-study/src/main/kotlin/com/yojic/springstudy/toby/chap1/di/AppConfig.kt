@@ -14,6 +14,7 @@ class AppConfig {
         return BeanNameDuplicateRegConfig()
     }
 
+    /*
     @Bean
     fun beefPatty(): com.yojic.springstudy.toby.chap1.soc.BeefPatty {
         return com.yojic.springstudy.toby.chap1.soc.BeefPatty()
@@ -33,4 +34,6 @@ class AppConfig {
     fun hamburger(): Hamburger {
         return Hamburger(beefPatty())
     }
+    s
+     */
 }
