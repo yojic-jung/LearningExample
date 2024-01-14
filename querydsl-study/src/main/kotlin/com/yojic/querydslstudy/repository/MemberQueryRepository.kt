@@ -1,20 +1,20 @@
 package com.yojic.querydslstudy.repository
 
 import com.yojic.querydslstudy.dto.MemberDto
-import com.yojic.querydslstudy.entity.MemberEntity
+import com.yojic.querydslstudy.entity.Member
 
 interface MemberQueryRepository {
-    fun findAllMembers(): List<MemberEntity>?
+    fun findAllMembers(): List<Member>?
 
-    fun findAllMembersWithRoles(): List<MemberEntity>?
+    fun findAllMembersWithRoles(): List<Member>?
 
-    fun findAllMembersFetchJoin(): List<MemberEntity>?
+    fun findMembersByMemIdFetchJoin(memId: Long): Member?
 
-    fun findAllMembersNoFetchJoin(): List<MemberEntity>?
+    fun findMembersByMemIdNoFetchJoin(memId: Long): Member?
 
     fun findAllMembersEmail(): List<MemberDto>?
 
-    fun findMemberEmailOnlyOne(): MemberEntity?
+    fun findMemberEmailOnlyOne(): Member?
 
-    fun findMemberEmailLimitOne(): MemberEntity?
+    fun findMemberEmailLimitOne(): Member?
 }

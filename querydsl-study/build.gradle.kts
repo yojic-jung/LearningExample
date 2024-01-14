@@ -7,6 +7,13 @@ plugins {
     kotlin("plugin.spring") version "1.9.20"
     kotlin("plugin.jpa") version "1.9.20"
     kotlin("kapt") version "1.9.20"
+    id("org.jetbrains.kotlin.plugin.allopen") version "1.9.20"
+}
+
+allOpen {
+    annotation("javax.persistence.Entity")
+    annotation("javax.persistence.MappedSuperclass")
+    annotation("javax.persistence.Embeddable")
 }
 
 group = "com.yojic"

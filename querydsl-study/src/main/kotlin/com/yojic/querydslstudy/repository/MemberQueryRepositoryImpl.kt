@@ -3,9 +3,9 @@ package com.yojic.querydslstudy.repository
 import com.querydsl.core.types.Projections
 import com.querydsl.jpa.impl.JPAQueryFactory
 import com.yojic.querydslstudy.dto.MemberDto
-import com.yojic.querydslstudy.entity.MemberEntity
-import com.yojic.querydslstudy.entity.QMemberEntity
-import com.yojic.querydslstudy.entity.QMemberRoleEntity
+import com.yojic.querydslstudy.entity.Member
+import com.yojic.querydslstudy.entity.QMember
+import com.yojic.querydslstudy.entity.QMemberRole
 import jakarta.persistence.EntityManager
 import org.springframework.stereotype.Repository
 
@@ -14,8 +14,8 @@ class MemberQueryRepositoryImpl(
     private val jpaQueryFactory: JPAQueryFactory,
     private val em: EntityManager,
 ) : MemberQueryRepository {
-    override fun findAllMembers(): List<MemberEntity>? {
-        val member = QMemberEntity.memberEntity
+    override fun findAllMembers(): List<Member>? {
+        val member = QMember.member
         return jpaQueryFactory
             .select(
                 member,
@@ -23,42 +23,41 @@ class MemberQueryRepositoryImpl(
             .fetch()
     }
 
-    override fun findAllMembersFetchJoin(): List<MemberEntity>? {
-        val member = QMemberEntity.memberEntity
-        val role = QMemberRoleEntity.memberRoleEntity
+    override fun findMembersByMemIdFetchJoin(memId: Long): Member? {
+        val member = QMember.member
+        val role = QMemberRole.memberRole
         return jpaQueryFactory
-            .select(
+            .selectFrom(
                 member,
-            ).from(member)
-            .leftJoin(member.roles, role).fetchJoin()
-            .fetch()
+            )
+            .where(member.memId.eq(memId))
+            .leftJoin(member.role, role)
+            .fetchJoin()
+            .fetchOne()
     }
 
-    override fun findAllMembersNoFetchJoin(): List<MemberEntity>? {
-        val member = QMemberEntity.memberEntity
-        val role = QMemberRoleEntity.memberRoleEntity
+    override fun findMembersByMemIdNoFetchJoin(memId: Long): Member? {
+        val member = QMember.member
+        val role = QMemberRole.memberRole
         return jpaQueryFactory
-            .select(
-                member,
-            ).from(member)
-            .leftJoin(member.roles, role)
-            .fetch()
+            .select(member).from(member)
+            .where(member.memId.eq(memId))
+            .fetchOne()
     }
 
-    override fun findAllMembersWithRoles(): List<MemberEntity>? {
-        val member = QMemberEntity.memberEntity
-        val role = QMemberRoleEntity.memberRoleEntity
+    override fun findAllMembersWithRoles(): List<Member>? {
+        val member = QMember.member
+        val role = QMemberRole.memberRole
         return jpaQueryFactory
             .select(
                 member,
             ).from(member)
             .leftJoin(role)
-            .where(member.memId.eq(role.memId))
             .fetch()
     }
 
     override fun findAllMembersEmail(): List<MemberDto>? {
-        val member = QMemberEntity.memberEntity
+        val member = QMember.member
         return jpaQueryFactory
             .select(
                 Projections.fields(
@@ -70,8 +69,8 @@ class MemberQueryRepositoryImpl(
             .fetch()
     }
 
-    override fun findMemberEmailOnlyOne(): MemberEntity? {
-        val member = QMemberEntity.memberEntity
+    override fun findMemberEmailOnlyOne(): Member? {
+        val member = QMember.member
         return jpaQueryFactory
             .select(
                 member,
@@ -79,8 +78,8 @@ class MemberQueryRepositoryImpl(
             .fetchOne()
     }
 
-    override fun findMemberEmailLimitOne(): MemberEntity? {
-        val member = QMemberEntity.memberEntity
+    override fun findMemberEmailLimitOne(): Member? {
+        val member = QMember.member
         return jpaQueryFactory
             .select(
                 member,
