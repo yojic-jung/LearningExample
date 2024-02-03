@@ -17,7 +17,4 @@ open class MemberRole(
     open var sysUpdateTime: LocalDateTime = LocalDateTime.now(),
     @UpdateTimestamp
     open var sysCreateTime: LocalDateTime = LocalDateTime.now(),
-    @ManyToOne
-    @JoinColumn(name = "memId", insertable = false, updatable = false)
-    open var member: Member? = null,
 )

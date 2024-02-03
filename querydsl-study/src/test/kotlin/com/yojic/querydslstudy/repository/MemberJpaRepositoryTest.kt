@@ -35,7 +35,6 @@ class MemberJpaRepositoryTest {
         val mem = Member()
         val regMem = memberJpaRepository.save(mem)
         val role = MemberRole(memId = regMem.memId, roleName = "user", enabled = true)
-        role.member = regMem
         val regMemRole = memberRoleJpaRepository.save(role)
         // 1차캐시에 엔티티의 변경이 반영됨, 1차 캐시 엔티티와 스냅샷을 통해 변경 감지
         regMem.role = mutableListOf(regMemRole)

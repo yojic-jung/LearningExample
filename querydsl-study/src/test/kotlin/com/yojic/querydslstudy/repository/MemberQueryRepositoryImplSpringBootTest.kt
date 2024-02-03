@@ -2,6 +2,7 @@ package com.yojic.querydslstudy.repository
 
 import com.yojic.querydslstudy.entity.Member
 import com.yojic.querydslstudy.entity.MemberRole
+import com.yojic.querydslstudy.helper.TransactionHelper
 import jakarta.transaction.Transactional
 import org.assertj.core.api.Assertions.assertThat
 import org.hibernate.proxy.HibernateProxy
@@ -21,7 +22,6 @@ class MemberQueryRepositoryImplSpringBootTest(
     var regMemId: Long = 0
 
     @BeforeEach
-    @Transactional
     fun `데이터 셋업`() {
         val mem = Member(email = "test@test.com")
         val regMem = memberJpaRepository.save(mem)
@@ -35,7 +35,7 @@ class MemberQueryRepositoryImplSpringBootTest(
     }
 
     @Test
-    fun `fetchjoin 테스트 - lazy loading 동작안함, 한방쿼리`() {
+    fun `fetchjoin 테스트 - lazy loading 동작 안함, 한방쿼리`() {
         val memberEntity = memberQueryRepositoryImpl.findMembersByMemIdFetchJoin(regMemId)!!
         // fetchjoin으로 연관관계까지 한번에 가져오므로 프록시가 아님
         assertThat(memberEntity is HibernateProxy).isFalse()
@@ -51,17 +51,23 @@ class MemberQueryRepositoryImplSpringBootTest(
     @Transactional
     fun `noFetchjoin 테스트 - lazy loading 동작`() {
         val memberEntity = memberQueryRepositoryImpl.findMembersByMemIdNoFetchJoin(regMemId)!!
+        memberEntity.role?.forEach { role ->
+            println(role.roleName)
+        }
         // fetchjoin으로 연관관계까지 한번에 가져오므로 프록시가 아님
         assertThat(memberEntity is HibernateProxy).isFalse()
         assertThat(memberEntity.role is HibernateProxy).isTrue()
     }
 
     @Test
+    @Transactional
     fun `lazy loading 동작`() {
         val memberEntity = memberJpaRepository.findByMemId(regMemId)!!
         // fetchjoin으로 연관관계까지 한번에 가져오므로 프록시가 아님
         assertThat(memberEntity is HibernateProxy).isFalse()
-        assertThat(memberEntity.role is HibernateProxy).isFalse()
-        assertThat(memberEntity.role).isNull()
+        memberEntity.role?.size
+        println(memberEntity.role?.size)
+        assertThat(memberEntity.role is HibernateProxy).isTrue()
+        assertThat(memberEntity.role).isNotNull()
     }
 }
