@@ -1,14 +1,14 @@
-package com.yojic.springstudy.beanfactory.hierarchy
+package com.yojic.springstudy.toby.chap1beanfactory.hierarchy
 
 import com.yojic.springstudy.toby.chap1.di.Person
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 @Configuration
-class ParentConfigWithAnnotation {
+class ChildConfig {
     @Bean
-    fun parent() = Person("parent")
+    fun child() = Person("child")
 
     @Bean
-    fun overrideTest() = Person("is overridden?")
+    fun overrideTest() = Person("Yes, it is overridden")
 }

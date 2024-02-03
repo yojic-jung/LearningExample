@@ -27,4 +27,17 @@ class BeanNameDuplicateTest {
 
         ctx.close()
     }
+
+    @Test
+    fun `@Import를 통한 Config설정과 빈 이름 중복시 등록되는 빈`() {
+        val childContext = AnnotationConfigApplicationContext(ChildConfigWithAnnotation::class.java)
+
+        val parentBean = childContext.getBean("parent", Person::class.java)
+        val childBean = childContext.getBean("child", Person::class.java)
+        val overrideTestBean = childContext.getBean("overrideTest", Person::class.java)
+
+        println(parentBean.name)
+        println(childBean.name)
+        println(overrideTestBean.name)
+    }
 }

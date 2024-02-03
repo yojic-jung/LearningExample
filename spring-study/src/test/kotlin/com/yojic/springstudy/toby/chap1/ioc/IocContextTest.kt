@@ -1,22 +1,25 @@
 package com.yojic.springstudy.toby.chap1.ioc
 
-import com.yojic.springstudy.beanfactory.hierarchy.ChildConfig
-import com.yojic.springstudy.beanfactory.hierarchy.ChildConfigWithAnnotation
-import com.yojic.springstudy.beanfactory.hierarchy.ParentConfig
+import com.yojic.springstudy.toby.chap1beanfactory.hierarchy.ChildConfig
+import com.yojic.springstudy.toby.chap1beanfactory.hierarchy.ParentConfig
 import com.yojic.springstudy.toby.chap1.di.Patty
 import com.yojic.springstudy.toby.chap1.di.Person
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.context.ApplicationContext
+import org.springframework.context.MessageSource
 import org.springframework.context.annotation.AnnotationConfigApplicationContext
+import java.util.*
 
 @SpringBootTest
 class IocContextTest {
     @Autowired
     private lateinit var context: ApplicationContext
+
     @Autowired
     private lateinit var childConfig: ChildConfig
+
     @Autowired
     private lateinit var parentConfig: ParentConfig
 
@@ -66,23 +69,13 @@ class IocContextTest {
         parentContext.close()
     }
 
-    @Test
-    fun `BeanFactory @Import 사용시 계층 구조 확인`() {
-        val childContext = AnnotationConfigApplicationContext(ChildConfigWithAnnotation::class.java)
-
-        val parentBean = childContext.getBean("parent", Person::class.java)
-        val childBean = childContext.getBean("child", Person::class.java)
-        val overrideTestBean = childContext.getBean("overrideTest", Person::class.java)
-
-        println(parentBean.name)
-        println(childBean.name)
-        println(overrideTestBean.name)
-    }
+    @Autowired
+    lateinit var messageSource: MessageSource
 
     @Test
-    fun `Configuration 테스트`() {
-        println(childConfig)
-        println(parentConfig)
-        println(childConfig === parentConfig)
+    fun `메시지 테스트`() {
+        Locale.setDefault(Locale("en", "US"))
+        println(messageSource.getMessage("name", arrayOf("tony"), Locale.getDefault()))
+        println(messageSource.getMessage("name", arrayOf("토니"), Locale.KOREA))
     }
 }

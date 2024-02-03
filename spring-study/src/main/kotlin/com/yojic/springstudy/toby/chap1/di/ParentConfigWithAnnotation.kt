@@ -1,0 +1,14 @@
+package com.yojic.springstudy.toby.chap1.di
+
+import com.yojic.springstudy.toby.chap1.di.Person
+import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Configuration
+
+@Configuration
+class ParentConfigWithAnnotation {
+    @Bean
+    fun parent() = Person("parent")
+
+    @Bean
+    fun overrideTest() = Person("is overridden?")
+}

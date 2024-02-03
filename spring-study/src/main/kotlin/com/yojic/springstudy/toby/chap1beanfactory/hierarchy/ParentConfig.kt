@@ -1,4 +1,4 @@
-package com.yojic.springstudy.beanfactory.hierarchy
+package com.yojic.springstudy.toby.chap1beanfactory.hierarchy
 
 import com.yojic.springstudy.toby.chap1.di.Person
 import org.springframework.context.annotation.Bean
