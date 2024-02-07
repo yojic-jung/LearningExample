@@ -6,10 +6,10 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.context.ApplicationEventPublisher
 
 @SpringBootTest
-class ObserverTest {
-
+class ObserverTest(
     @Autowired
-    lateinit var eventPublisher: ApplicationEventPublisher
+    val eventPublisher: ApplicationEventPublisher
+) {
 
     @Test
     fun `이벤트 발행-구독 옵저버 패턴 테스트`() {

@@ -17,11 +17,10 @@ class IocContextTest {
     @Autowired
     private lateinit var context: ApplicationContext
 
-    @Autowired
-    private lateinit var childConfig: ChildConfig
-
-    @Autowired
-    private lateinit var parentConfig: ParentConfig
+    @Test
+    fun `스프링 IOC Context 구현체 확인`() {
+        println(context::class.qualifiedName)
+    }
 
     @Test
     fun `스프링 IOC Context 모든 빈 이름 조회`() {

@@ -8,6 +8,5 @@ import org.springframework.scheduling.annotation.EnableAsync
 
 @EnableAsync
 @Configuration
-@ComponentScan(basePackages = ["com.yojic.springstudy.toby.chap1.observer"])
 class ObserverConfig
 
