@@ -24,6 +24,13 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
+
+    // h2
+    implementation("com.h2database:h2")
+
+    // jdbcTemplate
+    implementation("org.springframework.boot:spring-boot-starter-jdbc")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 

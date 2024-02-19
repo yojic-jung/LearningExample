@@ -1,4 +1,4 @@
-package com.yojic.springstudy.di.time
+package com.yojic.springstudy.strategy
 
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.core.io.ClassPathResource
