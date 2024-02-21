@@ -16,14 +16,14 @@ class MemberDao(
 ) {
     fun findById(memberId: Int): MemberEntity? {
         val sql = "SELECT * FROM member WHERE member_id = ?"
-        return jdbcTemplate.queryForObject(sql, arrayOf(memberId), BeanPropertyRowMapper(MemberEntity::class.java))
+        val memberList = jdbcTemplate.query(sql, arrayOf(memberId), BeanPropertyRowMapper(MemberEntity::class.java))
+        return if (memberList.isEmpty()) null else memberList[0]
     }
 
     fun save(member: MemberDto): Int {
         val sql = "insert into member(name, age) values (?, ?)"
 
         val keyHolder: KeyHolder = GeneratedKeyHolder()
-
         jdbcTemplate.update({ connection ->
             val ps: PreparedStatement = connection.prepareStatement(sql, RETURN_GENERATED_KEYS)
             ps.setString(1, member.name)

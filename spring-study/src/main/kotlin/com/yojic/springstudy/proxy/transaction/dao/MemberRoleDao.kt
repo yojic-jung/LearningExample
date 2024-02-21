@@ -17,7 +17,8 @@ class MemberRoleDao(
 ) {
     fun findById(memberId: Int): MemberRoleEntity? {
         val sql = "SELECT * FROM member_role WHERE member_role_id = ?"
-        return jdbcTemplate.queryForObject(sql, arrayOf(memberId), BeanPropertyRowMapper(MemberRoleEntity::class.java))
+        val memberRoleList = jdbcTemplate.query(sql, arrayOf(memberId), BeanPropertyRowMapper(MemberRoleEntity::class.java))
+        return if(memberRoleList.isEmpty()) null else memberRoleList[0]
     }
 
     fun save(memberRole: MemberRoleDto): Int {

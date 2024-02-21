@@ -12,11 +12,11 @@ class TransactionHandler(
     private val methodNamePatter: String,
 ) : InvocationHandler {
 
-    override fun invoke(proxy: Any?, method: Method?, args: Array<out Any>?): Any {
+    override fun invoke(proxy: Any?, method: Method?, args: Array<out Any>?): Any? {
         return if (method!!.name.startsWith(methodNamePatter)) {
             invokeTransaction(method, args)
         } else {
-            method.invoke(target, args)
+            method.invoke(target, args!!.get(0))
         }
     }
 

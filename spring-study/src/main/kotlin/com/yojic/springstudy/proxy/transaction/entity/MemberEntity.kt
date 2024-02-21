@@ -7,7 +7,7 @@ import jakarta.persistence.*
 class MemberEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val memberId: Int = 0,
-    val name: String = "",
-    val age: Int = 0,
+    var memberId: Int = 0, // jdbcTemplate 사용하려면 var로 선언
+    var name: String = "",
+    var age: Int = 0,
 )
