@@ -12,8 +12,13 @@ import java.sql.Statement.RETURN_GENERATED_KEYS
 
 @Component
 class MemberDao(
-    private val jdbcTemplate: JdbcTemplate,
+        private val jdbcTemplate: JdbcTemplate,
 ) {
+    fun deleteAll(): Int {
+        val sql = "DELETE FROM MEMBER"
+        return jdbcTemplate.update(sql)
+    }
+
     fun findById(memberId: Int): MemberEntity? {
         val sql = "SELECT * FROM member WHERE member_id = ?"
         val memberList = jdbcTemplate.query(sql, arrayOf(memberId), BeanPropertyRowMapper(MemberEntity::class.java))

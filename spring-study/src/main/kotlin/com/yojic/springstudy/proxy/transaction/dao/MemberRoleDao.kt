@@ -15,6 +15,10 @@ import java.sql.Statement
 class MemberRoleDao(
     private val jdbcTemplate: JdbcTemplate,
 ) {
+    fun deleteAll(): Int {
+        val sql = "DELETE FROM MEMBER_ROLE"
+        return jdbcTemplate.update(sql)
+    }
     fun findById(memberId: Int): MemberRoleEntity? {
         val sql = "SELECT * FROM member_role WHERE member_role_id = ?"
         val memberRoleList = jdbcTemplate.query(sql, arrayOf(memberId), BeanPropertyRowMapper(MemberRoleEntity::class.java))

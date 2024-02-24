@@ -12,6 +12,6 @@ class HelloProxyFactory(
     override fun getObject(): Any? = Proxy.newProxyInstance(
         javaClass.classLoader,
         arrayOf(serviceInterface),
-        HelloConcatHandler(target),
+        HelloConcatHandler(target, "hel*"),
     )
 }

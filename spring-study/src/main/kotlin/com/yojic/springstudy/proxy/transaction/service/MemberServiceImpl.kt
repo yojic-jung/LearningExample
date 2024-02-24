@@ -6,10 +6,11 @@ import com.yojic.springstudy.proxy.transaction.dto.MemberDto
 import com.yojic.springstudy.proxy.transaction.dto.MemberRoleDto
 import com.yojic.springstudy.proxy.transaction.entity.MemberEntity
 import com.yojic.springstudy.proxy.transaction.entity.MemberRoleEntity
+import org.springframework.stereotype.Component
 
-class MemberServiceImpl(
-    private val memberDao: MemberDao,
-    private val memberRoleDao: MemberRoleDao,
+open class MemberServiceImpl(
+        private val memberDao: MemberDao,
+        private val memberRoleDao: MemberRoleDao,
 ) : IMemberService {
 
     override fun findMemberById(id: Int): MemberEntity? {

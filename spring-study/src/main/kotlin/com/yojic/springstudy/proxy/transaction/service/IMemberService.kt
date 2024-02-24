@@ -5,6 +5,7 @@ import com.yojic.springstudy.proxy.transaction.entity.MemberEntity
 import com.yojic.springstudy.proxy.transaction.entity.MemberRoleEntity
 
 interface IMemberService {
+
     fun findMemberById(id: Int): MemberEntity?
 
     fun findMemberRoleById(id: Int): MemberRoleEntity?
