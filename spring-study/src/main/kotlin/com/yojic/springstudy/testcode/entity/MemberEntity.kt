@@ -1,14 +1,19 @@
 package com.yojic.springstudy.testcode.entity
 
 import jakarta.persistence.Entity
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.GenerationType
+import jakarta.persistence.Id
 import org.hibernate.annotations.CreationTimestamp
 import java.time.LocalDateTime
 
 @Entity
 class MemberEntity(
-    val id: Int,
-    val name: String,
-    val age: Int,
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id: Int,
+    var name: String,
+    var age: Int,
     @CreationTimestamp
-    val sysCreateDate: LocalDateTime? = null
+    var sysCreateDate: LocalDateTime? = null
 )

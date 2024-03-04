@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 
 /**
- * Def : 컨트롤러 테스트 목적
- * Desc: WebMvcTest 통해 컨트롤러 슬라이스 테스트 시 성능 확인과 테스트 가능 범위(또는 대상) 파악
+ * Def : 컨트롤러 슬라이스 테스트 목적
  */
 @RestController
 class MemberController(
