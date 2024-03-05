@@ -1,4 +1,4 @@
-package com.yojic.springstudy.testcode.entity
+package com.yojic.springstudy.testcode.example.entity
 
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue

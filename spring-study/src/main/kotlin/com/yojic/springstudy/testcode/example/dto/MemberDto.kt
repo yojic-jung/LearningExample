@@ -1,4 +1,4 @@
-package com.yojic.springstudy.testcode.dto
+package com.yojic.springstudy.testcode.example.dto
 
 import jakarta.validation.constraints.Positive
 import jakarta.validation.constraints.Size

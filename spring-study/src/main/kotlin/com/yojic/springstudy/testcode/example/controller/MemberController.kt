@@ -1,7 +1,8 @@
-package com.yojic.springstudy.testcode.controller
+package com.yojic.springstudy.testcode.example.controller
 
-import com.yojic.springstudy.testcode.dto.MemberDto
-import com.yojic.springstudy.testcode.service.MemberService
+import com.yojic.springstudy.testcode.example.dto.MemberDto
+import com.yojic.springstudy.testcode.example.service.MemberService
+import com.yojic.springstudy.testcode.example.service.MemberNoneService
 import org.springframework.http.ResponseEntity
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.PostMapping
@@ -13,12 +14,14 @@ import org.springframework.web.bind.annotation.RestController
  */
 @RestController
 class MemberController(
-    private val memberService: MemberService
+    private val memberService: MemberService,
+    private val memberNoneService: MemberNoneService
 ) {
 
     @PostMapping("/member")
     fun register(@Validated @RequestBody memberDto: MemberDto): ResponseEntity<Any> {
-        memberService.register(memberDto)
+        val result = memberService.register(memberDto)
+        println(result)
         return ResponseEntity.ok(true)
     }
 }
