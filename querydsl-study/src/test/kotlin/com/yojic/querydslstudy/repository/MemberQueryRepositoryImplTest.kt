@@ -6,9 +6,9 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.context.annotation.ComponentScan
+
 @DataJpaTest
 @ComponentScan(basePackages = ["com.yojic.querydslstudy.config"])
 class MemberQueryRepositoryImplTest {
@@ -65,41 +65,41 @@ class MemberQueryRepositoryImplTest {
         assertThat(memberSerchedPlural).isNotNull
     }
 
-/*
-    @Test
-    fun `fetchjoin 테스트`() {
-        // given
+    /*
+        @Test
+        fun `fetchjoin 테스트`() {
+            // given
 
-        // when
+            // when
 
 
-        // then
-        assertThat(memberListWithRole?.get(0)?.roles?.size).isGreaterThan(0)
-    }
+            // then
+            assertThat(memberListWithRole?.get(0)?.roles?.size).isGreaterThan(0)
+        }
 
-    @Test
-    fun `no-fetchjoin 테스트`() {
-        // given
-        for (i in 0..10) {
-            val mem = Member(email = "test $i")
-            val roles = mutableListOf(MemberRole(memId = i.toLong(), enabled = true, roleName = "user"))
-            var regMem = memberJpaRepository.save(mem)
-            for (role in roles) {
-                role.memId = regMem.memId
-                val regRole = memberRoleJpaRepository.save(role)
+        @Test
+        fun `no-fetchjoin 테스트`() {
+            // given
+            for (i in 0..10) {
+                val mem = Member(email = "test $i")
+                val roles = mutableListOf(MemberRole(memId = i.toLong(), enabled = true, roleName = "user"))
+                var regMem = memberJpaRepository.save(mem)
+                for (role in roles) {
+                    role.memId = regMem.memId
+                    val regRole = memberRoleJpaRepository.save(role)
+                }
             }
+            // when
+            val memberListWithRole = memberQueryRepositoryImpl.findAllMembersNoFetchJoin()
+            // then
+            for (mem in memberListWithRole!!) {
+                println("${mem.memId}, ${mem.roles?.get(0)?.memRoleId}, ${mem.roles?.get(0)?.roleName}")
+            }
+            val roles = memberRoleJpaRepository.findAll()
+            for (role in roles) {
+                println(role.roleName)
+            }
+            assertThat(memberListWithRole?.get(0)?.roles?.size).isEqualTo(1)
         }
-        // when
-        val memberListWithRole = memberQueryRepositoryImpl.findAllMembersNoFetchJoin()
-        // then
-        for (mem in memberListWithRole!!) {
-            println("${mem.memId}, ${mem.roles?.get(0)?.memRoleId}, ${mem.roles?.get(0)?.roleName}")
-        }
-        val roles = memberRoleJpaRepository.findAll()
-        for (role in roles) {
-            println(role.roleName)
-        }
-        assertThat(memberListWithRole?.get(0)?.roles?.size).isEqualTo(1)
-    }
-    */
+        */
 }
