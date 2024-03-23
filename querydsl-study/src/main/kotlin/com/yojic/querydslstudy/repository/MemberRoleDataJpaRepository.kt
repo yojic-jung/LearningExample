@@ -6,6 +6,4 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface MemberRoleJpaRepository : JpaRepository<MemberRoleEntity, Long> {
-    fun findByMemRoleId(id: Long): MemberRoleEntity?
-}
+interface MemberRoleDataJpaRepository : JpaRepository<MemberRoleDataEntity, Long>

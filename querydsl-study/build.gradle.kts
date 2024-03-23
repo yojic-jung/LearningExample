@@ -7,13 +7,18 @@ plugins {
     kotlin("plugin.spring") version "1.9.20"
     kotlin("plugin.jpa") version "1.9.20"
     kotlin("kapt") version "1.9.20"
-    id("org.jetbrains.kotlin.plugin.allopen") version "1.9.20"
+    kotlin("plugin.allopen") version "1.9.20"
+    kotlin("plugin.noarg") version "1.9.20"
 }
 
 allOpen {
-    annotation("javax.persistence.Entity")
-    annotation("javax.persistence.MappedSuperclass")
-    annotation("javax.persistence.Embeddable")
+    annotation("jakarta.persistence.Entity")
+    annotation("jakarta.persistence.MappedSuperclass")
+    annotation("jakarta.persistence.Embeddable")
+}
+
+noArg {
+    annotation("jakarta.persistence.Entity")
 }
 
 group = "com.yojic"
@@ -43,6 +48,10 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     // h2
     runtimeOnly("com.h2database:h2:2.2.224")
+
+    // mapstruct
+    implementation("org.mapstruct:mapstruct:1.5.5.Final")
+    kapt("org.mapstruct:mapstruct-processor:1.5.5.Final")
 
     developmentOnly("org.springframework.boot:spring-boot-devtools:3.2.2")
     testImplementation("org.springframework.boot:spring-boot-starter-test:3.2.2")

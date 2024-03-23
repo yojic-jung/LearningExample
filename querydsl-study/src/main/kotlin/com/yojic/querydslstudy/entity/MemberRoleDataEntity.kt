@@ -5,16 +5,17 @@ import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.UpdateTimestamp
 import java.time.LocalDateTime
 
+@Table(name = "member_role_data")
 @Entity
-open class MemberRole(
+data class MemberRoleDataEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    open var memRoleId: Long = 0,
-    open var memId: Long = 0,
-    open var enabled: Boolean,
-    open var roleName: String = "",
+    var memRoleId: Long = 0,
+    var memId: Long = 0,
+    var enabled: Boolean,
+    var roleName: String = "",
     @CreationTimestamp
-    open var sysUpdateTime: LocalDateTime = LocalDateTime.now(),
+    var sysUpdateTime: LocalDateTime = LocalDateTime.now(),
     @UpdateTimestamp
-    open var sysCreateTime: LocalDateTime = LocalDateTime.now(),
+    var sysCreateTime: LocalDateTime = LocalDateTime.now(),
 )
