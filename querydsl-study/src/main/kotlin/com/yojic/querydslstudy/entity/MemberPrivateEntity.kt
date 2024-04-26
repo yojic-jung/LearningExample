@@ -9,16 +9,16 @@ import org.hibernate.annotations.UpdateTimestamp
 import java.time.LocalDateTime
 
 @Entity
-open class MemberPrivate(
+class MemberPrivateEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    open var memPrvcId: Long = 0,
-    open var memId: Long = 0,
-    open var userName: String,
-    open var birth: String = "",
-    open var phone: String = "",
+    var memPrvcId: Long,
+    var memId: Long = 0,
+    var userName: String,
+    var birth: String = "",
+    var phone: String = "",
     @CreationTimestamp
-    open var sysUpdateTime: LocalDateTime = LocalDateTime.now(),
+    var sysUpdateTime: LocalDateTime = LocalDateTime.now(),
     @UpdateTimestamp
-    open var sysCreateTime: LocalDateTime = LocalDateTime.now()
+    var sysCreateTime: LocalDateTime = LocalDateTime.now()
 )
