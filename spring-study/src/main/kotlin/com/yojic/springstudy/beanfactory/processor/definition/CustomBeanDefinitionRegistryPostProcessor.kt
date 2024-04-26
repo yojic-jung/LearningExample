@@ -1,5 +1,6 @@
-package com.yojic.springstudy.beanfactory.processor
+package com.yojic.springstudy.beanfactory.processor.definition
 
+import org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator
 import org.springframework.beans.factory.support.BeanDefinitionBuilder
 import org.springframework.beans.factory.support.BeanDefinitionRegistry
 import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor

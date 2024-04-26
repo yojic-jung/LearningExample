@@ -1,4 +1,4 @@
-package com.yojic.springstudy.beanfactory.processor
+package com.yojic.springstudy.beanfactory.processor.definition
 
 import java.lang.annotation.*
 import java.lang.annotation.Retention

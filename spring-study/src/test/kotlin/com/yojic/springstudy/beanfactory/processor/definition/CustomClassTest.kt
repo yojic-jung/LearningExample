@@ -1,4 +1,4 @@
-package com.yojic.springstudy.beanfactory.processor
+package com.yojic.springstudy.beanfactory.processor.definition
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -9,9 +9,9 @@ import org.springframework.context.ApplicationContext
 @SpringBootTest
 class CustomClassTest(
     @Autowired private val context: ApplicationContext
-){
+) {
     @Test
-    fun `customBean 등록 확인`(){
+    fun `customBean 등록 확인`() {
         val customClass = context.getBean("customClass")
         assertThat(customClass).isNotNull
     }
