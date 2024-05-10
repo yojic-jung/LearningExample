@@ -6,8 +6,6 @@ import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketAddress;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Def. 동기-블로킹 동작 원리 예제

@@ -2,7 +2,7 @@ package com.javastudy.io;
 
 /**
  * Def. 동기-논블로킹 동작 원리 예제
- * - SyncWithNonBlocking 클래스와 함께 예제로 사용함
+ * - SyncNonBlocking 클래스와 함께 예제로 사용함
  */
 public class CalleeThread implements Runnable {
     // 작업 진척률
