@@ -22,7 +22,6 @@ dependencies {
     implementation(kotlin("stdlib"))
 
     implementation("org.springframework.boot:spring-boot-starter")
-    implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-aop:3.2.4")
 
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")

@@ -7,16 +7,14 @@ import org.springframework.context.annotation.Configuration
 @Configuration
 @ComponentScan(basePackages = ["com.yojic.springstudy.di"])
 class AppConfig {
-
     @Bean
-    fun beanNameDuplicate(): com.yojic.springstudy.di.BeanNameDuplicateRegConfig {
-        return com.yojic.springstudy.di.BeanNameDuplicateRegConfig()
+    fun beanNameDuplicate(): BeanNameDuplicateRegConfig {
+        return BeanNameDuplicateRegConfig()
     }
 
-    /*
     @Bean
-    fun beefPatty(): com.yojic.springstudy.toby.chap1.soc.BeefPatty {
-        return com.yojic.springstudy.toby.chap1.soc.BeefPatty()
+    fun beefPatty(): BeefPatty {
+        return BeefPatty()
     }
 
     @Bean
@@ -33,6 +31,4 @@ class AppConfig {
     fun hamburger(): Hamburger {
         return Hamburger(beefPatty())
     }
-    s
-     */
 }
