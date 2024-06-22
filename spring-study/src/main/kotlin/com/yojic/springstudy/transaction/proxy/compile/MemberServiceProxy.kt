@@ -1,5 +1,7 @@
 package com.yojic.springstudy.transaction.proxy.compile
 
+import com.yojic.springstudy.transaction.proxy.sample.MemberDto
+import org.springframework.stereotype.Component
 import org.springframework.transaction.PlatformTransactionManager
 import org.springframework.transaction.support.DefaultTransactionDefinition
 
@@ -11,14 +13,15 @@ import org.springframework.transaction.support.DefaultTransactionDefinition
  * - 타깃을 알고 있어야하는 단점
  * - 메서드 마다 부가기능(트랜잭션) 코드 중복
  */
+@Component
 class MemberServiceProxy(
     private val transactionManager: PlatformTransactionManager,
     private val memberServiceImpl: MemberService,
 ) : MemberService {
-    override fun create(member: Member) {
+    override fun create(memberDto: MemberDto) {
         val status = transactionManager.getTransaction(DefaultTransactionDefinition())
         try {
-            memberServiceImpl.create(member)
+            memberServiceImpl.create(memberDto)
             transactionManager.commit(status)
         } catch (e: Exception) {
             transactionManager.rollback(status)
