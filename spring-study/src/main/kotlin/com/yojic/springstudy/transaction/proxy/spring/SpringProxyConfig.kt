@@ -1,5 +1,6 @@
 package com.yojic.springstudy.transaction.proxy.spring
 
+import com.yojic.springstudy.transaction.proxy.compile.MemberService
 import org.springframework.aop.Advisor
 import org.springframework.aop.aspectj.AspectJExpressionPointcut
 import org.springframework.aop.framework.ProxyFactoryBean
@@ -20,11 +21,12 @@ class SpringProxyConfig(
     fun nameMatcher(): AspectJExpressionPointcut {
         // 프록시의 타깃은 final이 선언되면 안됨. 따라서 타깃 범위를 최대한 줄여놨음
         // 너무 지나치게 범용적으로 포인트컷을 걸면 해당 클래스 다 open 처리해야함
+        // expression 잘못 설정하면 프록시 빈 등록 정상적이지 않음
         var aspectPointcut = AspectJExpressionPointcut()
         aspectPointcut.expression = "execution(public void com.yojic.springstudy.transaction.proxy.compile" +
             ".MemberServiceImpl" +
             ".create" +
-            "(String)) && args(data)"
+            "(com.yojic.springstudy.transaction.proxy.sample.MemberDto))"
         return aspectPointcut
     }
 
@@ -46,6 +48,9 @@ class SpringProxyConfig(
         val proxyFactoryBean = ProxyFactoryBean()
         proxyFactoryBean.setTargetName("memberServiceImpl")
         proxyFactoryBean.setInterceptorNames("customTransactionAdvisor")
+
+        // 인터페이스 설정 없으면 프록시 설정 정상적이지 않음
+        proxyFactoryBean.setProxyInterfaces(arrayOf(MemberService::class.java))
         return proxyFactoryBean
     }
 }

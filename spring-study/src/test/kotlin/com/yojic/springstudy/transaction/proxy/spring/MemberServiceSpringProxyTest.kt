@@ -6,10 +6,13 @@ import com.yojic.springstudy.transaction.proxy.sample.MemberDto
 import com.yojic.springstudy.transaction.proxy.sample.MemberRepository
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.springframework.aop.support.DefaultPointcutAdvisor
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.context.annotation.Import
 
+@Import(SpringProxyConfig::class)
 @SpringBootTest
 class MemberServiceSpringProxyTest(
     @Autowired @Qualifier("memberServiceProxy") private val memberService: MemberService,

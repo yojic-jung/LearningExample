@@ -16,6 +16,8 @@ open class CustomTransactionAdvice(
 ) : MethodInterceptor {
     override fun invoke(invocation: MethodInvocation): Any? {
         val status = transactionManager.getTransaction(DefaultTransactionDefinition())
+        println("execute2222")
+
         try {
             val returnVal = invocation.proceed()
             transactionManager.commit(status)
