@@ -10,7 +10,9 @@ class MemberServiceImpl(
     private val memberMapper: MemberMapper,
 ) : MemberService {
     override fun create(memberDto: MemberDto) {
-        val memberEntity = memberRepo.save(memberMapper.memberToEntity(memberDto))
+        val mem = memberMapper.memberToEntity(memberDto)
+        val memberEntity = memberRepo.save(mem)
+
         // 트랜잭션 테스트를 위해 Exception을 던짐
         throw RuntimeException()
 

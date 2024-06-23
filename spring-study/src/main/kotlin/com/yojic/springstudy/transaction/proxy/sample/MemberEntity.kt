@@ -12,7 +12,6 @@ import jakarta.persistence.Table
 @Entity
 class MemberEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0
     var age: Int = 0
 
