@@ -53,4 +53,15 @@ class SpringProxyConfig(
         proxyFactoryBean.setProxyInterfaces(arrayOf(MemberService::class.java))
         return proxyFactoryBean
     }
+
+//    /**
+//     * DefaultAdvisorAutoProxyCreator를 사용하려면 기존에 등록된 프록시는 모두 주석 처리해야함
+//     * memberService(): ProxyFactoryBean와 MemberServiceCompileProxy 주석 처리해야함
+//     * 그렇지 않으면 같은 인터페이스 타입에 여러 구현체 존재하여 스프링이 어떤 빈을 의존 주입할지 모름
+//     * 테스트시 MemberServiceSpringProxyTest에서 Qualifier 제거하여 테스트 가능
+//     */
+//    @Bean
+//    fun defaultAdvisorAutoProxyCreator(): DefaultAdvisorAutoProxyCreator {
+//        return DefaultAdvisorAutoProxyCreator()
+//    }
 }
