@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component
 
 @Component
 class MemberMapper {
-    fun memberToEntity(memberDto: MemberDto): MemberEntity = MemberEntity(age = memberDto.age)
+    fun memberToEntity(memberDto: MemberDto): MemberEntity = MemberEntity(id = memberDto.id, age = memberDto.age)
 
     fun roleToEntity(
         memberEntity: MemberEntity,

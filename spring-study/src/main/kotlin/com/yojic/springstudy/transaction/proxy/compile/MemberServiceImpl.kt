@@ -3,7 +3,7 @@ package com.yojic.springstudy.transaction.proxy.compile
 import com.yojic.springstudy.transaction.proxy.sample.*
 import org.springframework.stereotype.Component
 
-@Component
+@Component("memberServiceImpl")
 class MemberServiceImpl(
     private val memberRepo: MemberRepository,
     private val memberRoleRepo: MemberRoleRepository,
@@ -11,6 +11,9 @@ class MemberServiceImpl(
 ) : MemberService {
     override fun create(memberDto: MemberDto) {
         val memberEntity = memberRepo.save(memberMapper.memberToEntity(memberDto))
+        // 트랜잭션 테스트를 위해 Exception을 던짐
+        throw RuntimeException()
+
         memberRoleRepo.save(memberMapper.roleToEntity(memberEntity, "USER"))
     }
 }

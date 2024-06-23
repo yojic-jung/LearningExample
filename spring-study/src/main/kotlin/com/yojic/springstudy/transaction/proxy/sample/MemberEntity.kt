@@ -14,12 +14,13 @@ class MemberEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0
-    var age: Long
+    var age: Int = 0
 
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     var role: MutableList<MemberRoleEntity> = mutableListOf()
 
-    constructor(age: Long) {
+    constructor(id: Long, age: Int) {
+        this.id = id
         this.age = age
     }
 }
