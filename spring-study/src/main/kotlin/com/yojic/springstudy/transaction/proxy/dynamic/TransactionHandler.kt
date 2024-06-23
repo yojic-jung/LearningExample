@@ -19,8 +19,11 @@ class TransactionHandler(
     private val transactionManager: PlatformTransactionManager,
     private val methodNamePatter: String,
 ) : InvocationHandler {
-
-    override fun invoke(proxy: Any?, method: Method?, args: Array<out Any>?): Any? {
+    override fun invoke(
+        proxy: Any?,
+        method: Method?,
+        args: Array<out Any>?,
+    ): Any? {
         return if (method!!.name.startsWith(methodNamePatter)) {
             invokeTransaction(method, args)
         } else {
@@ -28,7 +31,10 @@ class TransactionHandler(
         }
     }
 
-    private fun invokeTransaction(method: Method?, args: Array<out Any>?): Any? {
+    private fun invokeTransaction(
+        method: Method?,
+        args: Array<out Any>?,
+    ): Any? {
         val status = transactionManager.getTransaction(DefaultTransactionDefinition())
         try {
             val returnVal = method?.invoke(target, args!!.get(0))

@@ -7,10 +7,9 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 @SpringBootTest
 class BeanNameDuplicateTest {
-
     @Test
     fun `빈이름 중복 - 오버라이딩 테스트`() {
-        val ctx = AnnotationConfigApplicationContext(com.yojic.springstudy.di.AppConfig::class.java)
+        val ctx = AnnotationConfigApplicationContext(AppConfig::class.java)
 
         var beanNameDuplicateCnt = 0
         // 등록 빈 출력
@@ -30,7 +29,8 @@ class BeanNameDuplicateTest {
 
     @Test
     fun `@Import를 통한 Config설정과 빈 이름 중복시 등록되는 빈`() {
-        val childContext = AnnotationConfigApplicationContext(com.yojic.springstudy.di.ChildConfigWithAnnotation::class.java)
+        val childContext =
+            AnnotationConfigApplicationContext(ChildConfigWithAnnotation::class.java)
 
         val parentBean = childContext.getBean("parent", Person::class.java)
         val childBean = childContext.getBean("child", Person::class.java)

@@ -11,7 +11,7 @@ import org.springframework.transaction.support.DefaultTransactionDefinition
  * - 타깃 객체를 참조속성이 아닌 메서드 인자값으로 전달해주어 스프링 빈으로 등록 가능
  * - 메서드 선정 알고리즘(포인트컷)에 의존하지 않음, 오직 부가기능 제공만
  */
-open class CustomTransactionAdvice(
+class CustomTransactionAdvice(
     private val transactionManager: PlatformTransactionManager,
 ) : MethodInterceptor {
     override fun invoke(invocation: MethodInvocation): Any? {

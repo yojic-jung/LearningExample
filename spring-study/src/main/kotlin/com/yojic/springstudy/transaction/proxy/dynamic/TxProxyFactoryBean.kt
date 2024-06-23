@@ -11,7 +11,7 @@ import java.lang.reflect.Proxy
  * - 하나의 클래스 내의 메서드에서 중복되는 코드를 제거할 수 있음
  * - 허나 xml 설정 중복 문제가 발생
  */
-class TxProxyFactoryBean(
+open class TxProxyFactoryBean(
     private val target: Any,
     private val transactionManager: PlatformTransactionManager,
     private val methodNamePatter: String,
